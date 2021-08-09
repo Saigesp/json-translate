@@ -3,6 +3,9 @@ import os
 import re
 import json
 import argparse
+from dotenv import load_dotenv
+
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 """
 Translate json files with deepl API
@@ -48,32 +51,44 @@ def get_target_lang_code(args):
     while len(lang_code) != 2:
         lang_code = input('Language code to translate to (2 letters): ')
 
-    return lang_code
+    return lang_code.upper()
 
 
-def get_strings_from_file(filepath):
+def get_strings_from_file(filepath, locale_target):
     with open(filepath) as f:
         data = json.load(f)
-        json_iterator(data)
+        return json_iterator(data, locale_target)
 
 
-def json_iterator(data):
-    for key,value in data.items():
+def json_iterator(data, locale_target, stored = {}):
+    """
+    Iterate over json file
+    - These json files only contains dicts and strings, not arrays, booleans or numbers
+    """
+    for key, value in data.items():
         if type(value) == type(dict()):
-            json_iterator(value)
-        elif type(value) == type(list()):
-            for val in value:
-                if type(val) == type(str()):
-                    pass
-                elif type(val) == type(list()):
-                    pass
-                else:
-                    json_iterator(val)
-        else:
-            print(f"{key}: {value}")
+            stored[key] = {}
+            stored[key] = json_iterator(value, locale_target, stored[key])
+        elif type(value) == type(str()):
+            stored[key] = translate_string(value, locale_target)
+    
+    return stored
+
+
+def translate_string(string, locale_target):
+    if type(string) != type(str()):
+        return string
+    if string == '':
+        return string
+
+    return f"{string} in {locale_target}"
 
 
 if __name__ == "__main__":
+    load_dotenv(dotenv_path=os.path.join(CURRENT_DIR, '.env'))
+    if not os.environ.get('DEEPL_AUTH_KEY'):
+        raise Exception('Environment variables not loaded')
+
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", help="Folder to look for translation files")
     parser.add_argument("-l", help="Language target to translate")
@@ -94,6 +109,11 @@ if __name__ == "__main__":
         input_file = os.path.normpath(input_dir)
 
     lang_code = get_target_lang_code(args)
+    json_file_name = input_file.split('/')[-1].split('.')[0]
 
-    # print(input_file, lang_code)
-    get_strings_from_file(input_file)
+    if lang_code.lower() == json_file_name.lower():
+        print('You are trying to translate the same language!')
+        exit()
+
+    result = get_strings_from_file(input_file, lang_code)
+    print('--> result', result)
