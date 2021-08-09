@@ -125,8 +125,10 @@ def translate_string(text, target_locale):
     if len(response_data['translations']) > 1:
         print(f"({text}) More than 1 translation: {response_data['translations']}")
     
-    return response_data['translations'][0]['text']
+    return decode_text(response_data['translations'][0]['text'])
 
+def decode_text(text):
+    return str(text)
 
 def save_results_file(data, output_file, indent):
     """

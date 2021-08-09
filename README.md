@@ -6,7 +6,7 @@ Usually multi-language projects developed with a javascript framework (Angular, 
 
 - Works with Python3
 
-```
+```shell
 python main.py /path/to/file/en_US.json --locale es --output es_ES.json --indent 4 --sleep 0.5
 ```
 > See more options with `python main.py --help`
@@ -32,15 +32,21 @@ DEEPL_AUTH_KEY=your-key-here
 ```
 
 2. Execute the command with the file path and the language you want to generate
-```
+```shell
 python main.py /home/user/my_project/locales/en_US.json --locale ES --output es_ES.json
 ```
 
 The script will create an X`es_ES.json` file in the same folder as the source file.
 
 - You can check your API usage with
-```
+```shell
 curl -H "Authorization: DeepL-Auth-Key YOUR-API-KEY-HERE" https://api-free.deepl.com/v2/usage
+```
+
+## Tests
+Run tests with:
+```shell
+python -m unittest discover
 ```
 
 ## License
