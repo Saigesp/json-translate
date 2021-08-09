@@ -38,5 +38,10 @@ python main.py /home/user/my_project/locales/en_US.json --locale ES --output es_
 
 The script will create an X`es_ES.json` file in the same folder as the source file.
 
+- You can check your API usage with
+```
+curl -H "Authorization: DeepL-Auth-Key YOUR-API-KEY-HERE" https://api-free.deepl.com/v2/usage
+```
+
 ## License
 This repository is available under **GNU LESSER GENERAL PUBLIC LICENSE v2.1** (LGPL). See [details](LICENSE.md).
