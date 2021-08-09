@@ -2,13 +2,12 @@
 
 Translate json files with deepl API
 
-- Python 3 required
+Usually multi-language projects developed with a javascript framework (Angular, Vue...) base their translations on json files with different nesting levels. This small project allows you to generate new files for other languages while keeping the same structure.
 
-Exmples:
+- Works with Python3
+
 ```
-python main.py /path/to/locales
-python main.py /path/to/file/en.json -l es
-python main.py /path/to/file/en_US.json --locale es --output es_ES.json --indent 2
+python main.py /path/to/file/en_US.json --locale es --output es_ES.json --indent 4 --sleep 0.5
 ```
 > See more options with `python main.py --help`
 
@@ -26,3 +25,18 @@ DEEPL_AUTH_KEY=your-key-here
 ```
 > You can get a free deepl developer account in https://www.deepl.com/pro-checkout/account
 
+## Usage
+1. Locate the translation file that you want to use as a source.
+```
+/home/user/my_project/locales/en_US.json
+```
+
+2. Execute the command with the file path and the language you want to generate
+```
+python main.py /home/user/my_project/locales/en_US.json --locale ES --output es_ES.json
+```
+
+The script will create an X`es_ES.json` file in the same folder as the source file.
+
+## License
+This repository is available under **GNU LESSER GENERAL PUBLIC LICENSE v2.1** (LGPL). See [details](LICENSE.md).
