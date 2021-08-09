@@ -1,6 +1,6 @@
-# vue-deepl-translate
+# json-deepl-translate
 
-Translate vue-i18n with deepl API
+Translate json files with deepl API
 
 - Python 3 required
 
