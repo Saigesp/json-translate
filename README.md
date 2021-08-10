@@ -36,7 +36,7 @@ DEEPL_AUTH_KEY=your-key-here
 python main.py /home/user/my_project/locales/en_US.json --locale ES --output es_ES.json
 ```
 
-The script will create an X`es_ES.json` file in the same folder as the source file.
+The script will create an `es_ES.json` file in the same folder as the source file.
 
 - You can check your API usage with
 ```shell
