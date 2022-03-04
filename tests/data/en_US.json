@@ -1,0 +1,34 @@
+{
+  "common": {
+    "active": "Active",
+    "add": "Add",
+    "amount": "Amount",
+    "questions": {
+      "are-you-sure": "Are you sure?"
+    },
+    "animals": [
+      "dog",
+      "cat"
+    ],
+    "countries": [
+      {
+        "name": "France",
+        "continent": "Europe"
+      },
+      {
+        "name": "Brazil",
+        "continent": "South America"
+      }
+    ],
+    "values": {
+      "ok": true,
+      "no": false,
+      "some-int": 123456,
+      "some-float": 987.654
+    },
+    "no-translate": {
+      "lorem": "Hello",
+      "ipsum": "Godbye"
+    }
+  }
+}

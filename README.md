@@ -23,22 +23,33 @@ pip install -r requirements.txt
 ```
 DEEPL_AUTH_KEY=your-key-here
 ```
-> You can get a free deepl developer account in https://www.deepl.com/pro-checkout/account
+> You can get a free deepl developer account in https://www.deepl.com/pro-checkout/account (Credit card needed)
 
 ## Usage
-1. Locate the translation file that you want to use as a source.
-```
-/home/user/my_project/locales/en_US.json
-```
-
-2. Execute the command with the file path and the language you want to generate
+1. Execute the command with the file path and the language you want to generate
 ```shell
 python main.py /home/user/my_project/locales/en_US.json --locale ES --output es_ES.json
 ```
+> The script will create an `es_ES.json` file in the same folder as the source file.
 
-The script will create an `es_ES.json` file in the same folder as the source file.
+### Optional parameters
 
-- You can check your API usage with
+```
+-l, --locale    Language target to translate. Defaults to "en"
+-o, --output    Output file name. Defaults to "en.json
+-s, --sleep     Sleep time between API calls. Defaults to 0.01s
+-i, --indent    Output file indentation spaces. Defaults to 2
+--skip          Keys to skip (they won't be translated)
+```
+
+### Example file
+Translate the example file `/tests/data/en_US.json` to spanish:
+```shell
+python main.py tests/data/en_US.json --locale ES --output es_ES.json --skip lorem ipsum
+```
+
+### API usage
+You can check your API usage with
 ```shell
 curl -H "Authorization: DeepL-Auth-Key YOUR-API-KEY-HERE" https://api-free.deepl.com/v2/usage
 ```
