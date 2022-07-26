@@ -81,7 +81,9 @@ def get_target_lang_code(locale):
     return lang_code
 
 
-def get_strings_from_file(filepath, target_locale, sleep, skip):
+def get_strings_from_file(filepath, target_locale, sleep, skip=None):
+    if skip is None:
+        skip = []
     with open(filepath) as f:
         data = json.load(f)
         return iterate_translate(
