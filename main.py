@@ -16,16 +16,23 @@ ENCODING = "utf-8"
 GLOBAL_CACHE = dict()
 
 
-def find_files(path):
+def find_files(path: str) -> list:
     """
     Find all json files in folder
+
+    :param path: directory path to list files
+    :return: files in directory
     """
     return [file for file in os.listdir(path) if re.search(r"\.json$", file)]
 
 
-def get_input_file(json_files, input_dir):
+def get_input_file(json_files: list, input_dir: str) -> str:
     """
     Get input file from folder
+
+    :param json_files: list of files in directory
+    :param input_dir: directory containing these files
+    :return: file to translate
     """
     if len(json_files) == 0:
         print("No files found")
@@ -43,13 +50,14 @@ def get_input_file(json_files, input_dir):
         return os.path.join(input_dir, json_files[int(file_idx)])
 
 
-def get_output_file(output, lang_code, input_file):
+def get_output_file(output: str, lang_code: str, input_file: str) -> str:
     """
     Get output file
 
-    @param output: output file
-    @param lang_code: output file language code
-    @param input_file: input file
+    :param output: output file
+    :param lang_code: output file language code
+    :param input_file: input file
+    :return: file to output translations
     """
     output_file_name = output if output else f"{lang_code}.json"
     if not output_file_name.endswith(".json"):
@@ -68,11 +76,12 @@ def get_output_file(output, lang_code, input_file):
     return output_file
 
 
-def get_target_lang_code(locale):
+def get_target_lang_code(locale: str) -> str:
     """
     Get language code from input
 
-    @param locale: locate target to use
+    :param locale: locate target to use
+    :return: output locale code
     """
     lang_code = "" if not locale else locale
     while len(lang_code) != 2:
@@ -81,9 +90,24 @@ def get_target_lang_code(locale):
     return lang_code
 
 
-def get_strings_from_file(filepath, target_locale, sleep, skip=None):
+def get_strings_from_file(
+    filepath: str,
+    target_locale: str,
+    sleep: float,
+    skip: list = None,
+) -> dict:
+    """
+    Get translated strings from file
+
+    :param filepath: file path to translate
+    :param target_locale: locale to translate
+    :param sleep: sleep time between API calls
+    :param skip: list of keys to ignore
+    :return: translated file
+    """
     if skip is None:
         skip = []
+
     with open(filepath) as f:
         data = json.load(f)
         return iterate_translate(
@@ -94,14 +118,15 @@ def get_strings_from_file(filepath, target_locale, sleep, skip=None):
         )
 
 
-def iterate_translate(data, target_locale: str, sleep: float, skip: list):
+def iterate_translate(data: dict, target_locale: str, sleep: float, skip: list):
     """
     Iterate on data and translate the corresponding values
 
-    @param data: data to iterate
-    @param target_locale: language into which the data will be translated
-    @param sleep: sleep time between calls
-    @param skip: list ok keys to skip (no translate)
+    :param data: data to iterate
+    :param target_locale: language into which the data will be translated
+    :param sleep: sleep time between calls
+    :param skip: list ok keys to skip (no translate)
+    :return: translated block
     """
     if isinstance(data, dict):
         # Value is hierarchical, so iterate it
@@ -129,16 +154,24 @@ def iterate_translate(data, target_locale: str, sleep: float, skip: list):
         return data
 
 
-def translate_string(text, target_locale, sleep, cache=False):
+def translate_string(text: str, target_locale: str, sleep: float, cache: dict = None):
     """
-    test with curl:
+    Translate a specifig string
+
+    Test with curl:
     $ curl https://api-free.deepl.com/v2/translate -d auth_key=YOUR-API-KEY-HERE -d "text=Hello, world!" -d "target_lang=ES"
+
+    :param text: string to translate
+    :param target_locale: language into which the data will be translated
+    :param sleep: sleep time between calls
+    :param cache: cache object
+    :return: string translation
     """
     global GLOBAL_CACHE
     if type(text) != type(str()):
         return text
 
-    if cache:
+    if cache is not None:
         try:
             res = GLOBAL_CACHE[text]
             print("Using cache: ", text, " -> ", res)
@@ -181,13 +214,17 @@ def translate_string(text, target_locale, sleep, cache=False):
     return dec_text
 
 
-def decode_text(text):
+def decode_text(text: str) -> str:
     return str(text)
 
 
-def save_results_file(data, output_file, indent):
+def save_results_file(data: dict, output_file: str, indent: int = 2) -> None:
     """
     Write output file
+
+    :param data: dict object to dump into file
+    :param output_file: output file path
+    :param indent: json indentation
     """
     with open(output_file, "w") as file:
         json.dump(data, file, indent=indent, ensure_ascii=False)
@@ -207,10 +244,15 @@ def main():
     parser.add_argument(
         "-l",
         "--locale",
-        help="Language target to translate",
         default="en",
+        help="Language target to translate",
     )
-    parser.add_argument("-o", "--output", help="Output file name", default="en.json")
+    parser.add_argument(
+        "-o",
+        "--output",
+        default="en.json",
+        help="Output file name",
+    )
     parser.add_argument(
         "-i",
         "--indent",
