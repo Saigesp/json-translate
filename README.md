@@ -58,6 +58,9 @@ You can check your API usage with
 curl -H "Authorization: DeepL-Auth-Key YOUR-API-KEY-HERE" https://api-free.deepl.com/v2/usage
 ```
 
+## Contributing
+See the [contributing guide](CONTRIBUTING.md) for detailed instructions on how to get started.
+
 ## Tests
 Run tests with:
 ```shell
