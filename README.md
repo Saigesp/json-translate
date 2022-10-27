@@ -11,6 +11,10 @@ python main.py /path/to/file/en_US.json --locale es --output es_ES.json --indent
 ```
 > See more options with `python main.py --help`
 
+## Supported languages
+
+You can check the supported languages at this link: [DeepL Translate Text Request Parameters](https://www.deepl.com/docs-api/translate-text) (parameters `source_lang` and `target_lang`)
+
 ## Install
 1. Create virtual environment
 
@@ -48,7 +52,7 @@ Translate the example file `/tests/data/en_US.json` to spanish:
 python main.py tests/data/en_US.json --locale ES --output es_ES.json --skip lorem ipsum
 ```
 
-### API usage
+## API usage
 You can check your API usage with
 ```shell
 curl -H "Authorization: DeepL-Auth-Key YOUR-API-KEY-HERE" https://api-free.deepl.com/v2/usage
