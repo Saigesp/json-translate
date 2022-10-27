@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
-
-from json_translate import decode_text
+import json_translate
 
 
 class Test(unittest.TestCase):
     def test_string_decode(self):
-        self.assertEqual(decode_text("m\u00b2"), "m²")
+        self.assertEqual(json_translate.translator.decode_text("m\u00b2"), "m²")
