@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from main import decode_text
+from json_translate import decode_text
 
 
 class Test(unittest.TestCase):

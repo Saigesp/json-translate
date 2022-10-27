@@ -7,9 +7,9 @@ Usually multi-language projects developed with a javascript framework (Angular, 
 - Works with Python3
 
 ```shell
-python main.py /path/to/file/en_US.json --locale es --output es_ES.json --indent 4 --sleep 0.5
+python json_translate /path/to/file/en_US.json --locale es --output es_ES.json --indent 4 --sleep 0.5
 ```
-> See more options with `python main.py --help`
+> See more options with `python json_translate --help`
 
 ## Supported languages
 
@@ -32,7 +32,7 @@ DEEPL_AUTH_KEY=your-key-here
 ## Usage
 1. Execute the command with the file path and the language you want to generate
 ```shell
-python main.py /home/user/my_project/locales/en_US.json --locale ES --output es_ES.json
+python json_translate /home/user/my_project/locales/en_US.json --locale ES --output es_ES.json
 ```
 > The script will create an `es_ES.json` file in the same folder as the source file.
 
@@ -49,7 +49,7 @@ python main.py /home/user/my_project/locales/en_US.json --locale ES --output es_
 ### Example file
 Translate the example file `/tests/data/en_US.json` to spanish:
 ```shell
-python main.py tests/data/en_US.json --locale ES --output es_ES.json --skip lorem ipsum
+python json_translate tests/data/en_US.json --locale ES --output es_ES.json --skip lorem ipsum
 ```
 
 ## API usage
