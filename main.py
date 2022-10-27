@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 import os
 import re
 import json
@@ -154,7 +154,9 @@ def iterate_translate(data: dict, target_locale: str, sleep: float, skip: list):
         return data
 
 
-def translate_string(text: str, target_locale: str, sleep: float, cache: dict = None):
+def translate_string(
+    text: str, target_locale: str, sleep: float, cache: dict = None
+) -> str:
     """
     Translate a specifig string
 
@@ -191,7 +193,7 @@ def translate_string(text: str, target_locale: str, sleep: float, cache: dict = 
     ).encode()
 
     req = request.Request(DEEPL_API_ENDPOINT, data=data)
-    response = request.urlopen(req)
+    response = request.urlopen(req)  # nosec
 
     if response.status != 200:
         print(f"{text}  ->  ERROR (response status {response.status})")

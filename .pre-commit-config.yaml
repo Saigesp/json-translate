@@ -1,0 +1,39 @@
+repos:
+  - repo: https://github.com/yunojuno/pre-commit-xenon
+    rev: cc59b0431a5d072786b59430e9b342b2881064f6
+    hooks:
+    - id: xenon
+      args: ["--max-average=A", "--max-modules=C", "--max-absolute=C"]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: fix-encoding-pragma
+
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.9.0
+    hooks:
+      - id: python-no-eval
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.3
+    hooks:
+      - id: bandit
+        args: ["--exclude", "tests", "-s", "B101"]
+
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+
+  - repo: local
+    hooks:
+      - id: local-tests
+        name: local-tests
+        entry: python -m unittest discover
+        always_run: true
+        pass_filenames: false
+        language: system
