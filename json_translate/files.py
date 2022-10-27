@@ -78,14 +78,18 @@ def get_output_file(output: str, lang_code: str, input_file: str) -> str:
     :return: file to output translations
     """
     output_file_name = output if output else f"{lang_code}.json"
+
     if not output_file_name.endswith(".json"):
         output_file_name += ".json"
+
     output_file = os.path.join(os.path.dirname(input_file), output_file_name)
+
     if os.path.exists(output_file):
         override = input(
-            f"File {output_file_name} already exists. Do you want to override it? [Y/N] "
+            f"File {output_file_name} already exists."
+            "Do you want to override it? [Y/n] "
         )
-        if not override.lower() in ("y", "yes"):
+        if not override.lower() in ("y", "yes", "ok", ""):
             output_file_name = input(f"Enter the new file name: ")
             if not output_file_name.endswith(".json"):
                 output_file_name += ".json"
