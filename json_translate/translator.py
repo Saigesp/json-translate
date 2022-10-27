@@ -38,6 +38,24 @@ def translate_file(
         )
 
 
+def get_dict_iteration(
+    data: dict, target_locale: str, sleep: float, skip: list
+) -> dict:
+    res = dict()
+    for key, value in data.items():
+        if key in skip:
+            res[key] = value
+        else:
+            res[key] = iterate_over_keys(value, target_locale, sleep, skip)
+    return res
+
+
+def get_string_iteration(data: dict, target_locale: str, sleep: float) -> str:
+    if data == "":
+        return data
+    return translate_string(data, target_locale, sleep)
+
+
 def iterate_over_keys(data: dict, target_locale: str, sleep: float, skip: list):
     """
     Iterate on data and translate the corresponding values
@@ -50,13 +68,7 @@ def iterate_over_keys(data: dict, target_locale: str, sleep: float, skip: list):
     """
     if isinstance(data, dict):
         # Value is hierarchical, so iterate it
-        res = dict()
-        for key, value in data.items():
-            if key in skip:
-                res[key] = value
-            else:
-                res[key] = iterate_over_keys(value, target_locale, sleep, skip)
-        return res
+        return get_dict_iteration(data, target_locale, sleep, skip)
 
     if isinstance(data, list):
         # Value is multiple, so iterate it
@@ -64,10 +76,7 @@ def iterate_over_keys(data: dict, target_locale: str, sleep: float, skip: list):
 
     if isinstance(data, str):
         # Value is string, so translate it
-        if data == "":
-            return data
-
-        return translate_string(data, target_locale, sleep)
+        return get_string_iteration(data, target_locale, sleep)
 
     if isinstance(data, bool) or isinstance(data, int) or isinstance(data, float):
         # Value is boolean or numerical, return same value
