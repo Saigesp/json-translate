@@ -130,3 +130,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Test data files
+tests/data/*
+!tests/data/en_US.json
