@@ -106,7 +106,7 @@ def save_results_file(data: dict, output_file: str, indent: int = 2) -> None:
     :param output_file: output file path
     :param indent: json indentation
     """
-    with open(output_file, "w") as file:
+    with open(output_file, "w", encoding='utf8') as file:
         json.dump(data, file, indent=indent, ensure_ascii=False)
 
     print(f"Results saved on {output_file}")
