@@ -28,7 +28,7 @@ def translate_file(
     if skip is None:
         skip = []
 
-    with open(filepath) as f:
+    with open(filepath, 'r', encoding='utf8') as f:
         data = json.load(f)
         return iterate_over_keys(
             data=data,
