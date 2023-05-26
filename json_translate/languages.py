@@ -11,8 +11,8 @@ def get_target_lang_code(locale: str) -> str:
     """
     lang_code = "" if not locale else locale
 
-    while len(lang_code) != 2:
-        lang_code = input("Language code to translate to (2 letters): ")
+    while len(lang_code) < 5:
+        lang_code = input("Language code to translate to (usually 2 letters, unless a supported region like EN-GB): ")
 
     if not lang_code in SUPPORTED_LANG_CODES:
         print(
