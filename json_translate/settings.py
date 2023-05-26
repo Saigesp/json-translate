@@ -19,8 +19,8 @@ GLOBAL_CACHE = dict()
 # https://www.deepl.com/docs-api/translate-text
 # fmt: off
 SUPPORTED_LANG_CODES = (
-    'BG', 'CS', 'DA', 'DE', 'EL', 'EN', 'ES', 'ET', 'FI', 'FR', 'HU', 'ID',
-    'IT', 'JA', 'LT', 'LV', 'NL', 'PL', 'PT', 'RO', 'RU', 'SK', 'SL', 'SV',
+    'BG', 'CS', 'DA', 'DE', 'EL', 'EN', 'EN-GB', 'EN-US', 'ES', 'ET', 'FI', 'FR', 'HU', 'ID',
+    'IT', 'JA', 'LT', 'LV', 'NL', 'PL', 'PT-PT', 'PT-BR', 'RO', 'RU', 'SK', 'SL', 'SV',
     'TR', 'UK', 'ZH',
 )
 # fmt: on
