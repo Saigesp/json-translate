@@ -28,6 +28,7 @@ pip install -r requirements.txt
 DEEPL_AUTH_KEY=your-key-here
 ```
 > You can get a free deepl developer account in https://www.deepl.com/pro-checkout/account (Credit card needed)
+> Note: If you wish to upgrade to a paid account, you will need to change `DEEPL_API_ENDPOINT` in `settings.py` to `https://api.deepl.com/v2/translate`
 
 ## Usage
 1. Execute the command with the file path and the language you want to generate
