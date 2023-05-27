@@ -6,6 +6,7 @@ import argparse
 from settings import (
     INDENTATION_DEFAULT,
     SLEEP_BETWEEN_API_CALLS,
+    ENCODING,
 )
 
 
@@ -14,7 +15,7 @@ def get_parser(prog_name):
     Constructs and returns the argument parser for all commands.
     """
 
-    if not os.environ.get("DEEPL_AUTH_KEY", False):
+    if not os.environ.get("DEEPL_AUTH_KEY"):
         # TODO: Set as argument with default from env vars
         raise Exception("Environment variables not loaded")
 
@@ -57,6 +58,16 @@ def get_parser(prog_name):
         "--skip",
         nargs="+",
         help="Keys to skip",
+    )
+    parser.add_argument(
+        "--encoding",
+        default=ENCODING,
+        help="File encoding",
+    )
+    parser.add_argument(
+        "--log",
+        action="store_true",
+        help="If print translation results",
     )
 
     return parser

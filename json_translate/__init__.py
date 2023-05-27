@@ -9,4 +9,3 @@ import files
 import languages
 import parser
 import settings
-import translator

@@ -87,7 +87,7 @@ def get_output_file(output: str, lang_code: str, input_file: str) -> str:
     if os.path.exists(output_file):
         override = input(
             f"File {output_file_name} already exists."
-            "Do you want to override it? [Y/n] "
+            " Do you want to override it? [Y/n] "
         )
         if not override.lower() in ("y", "yes", "ok", ""):
             output_file_name = input(f"Enter the new file name: ")
@@ -98,15 +98,21 @@ def get_output_file(output: str, lang_code: str, input_file: str) -> str:
     return output_file
 
 
-def save_results_file(data: dict, output_file: str, indent: int = 2) -> None:
+def save_results_file(
+    data: dict,
+    output_file: str,
+    indent: int = 2,
+    encoding: str = "utf8",
+) -> None:
     """
     Write output file
 
     :param data: dict object to dump into file
     :param output_file: output file path
     :param indent: json indentation
+    :param encoding: file encoding
     """
-    with open(output_file, "w", encoding='utf8') as file:
+    with open(output_file, "w", encoding=encoding) as file:
         json.dump(data, file, indent=indent, ensure_ascii=False)
 
     print(f"Results saved on {output_file}")

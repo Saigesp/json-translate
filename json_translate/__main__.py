@@ -11,7 +11,7 @@ from files import (
     get_output_file,
     save_results_file,
 )
-from translator import translate_file
+from translators.deepl import DeepLTranslator
 
 load_dotenv()
 
@@ -29,9 +29,23 @@ def main():
         print("You are trying to translate the same language!")
         exit(1)
 
-    output_file = get_output_file(args.output, lang_code, input_file)
-    results = translate_file(input_file, lang_code.upper(), args.sleep, args.skip)
-    save_results_file(results, output_file, args.indent)
+    output_file = get_output_file(
+        output=args.output, lang_code=lang_code, input_file=input_file
+    )
+    translator = DeepLTranslator(
+        target_locale=lang_code.upper(),
+        sleep=args.sleep,
+        skip=args.skip,
+        encoding=args.encoding,
+        log_translations=args.log,
+    )
+    results = translator.translate_file(filepath=input_file)
+    save_results_file(
+        data=results,
+        output_file=output_file,
+        indent=args.indent,
+        encoding=args.encoding,
+    )
 
 
 if __name__ == "__main__":

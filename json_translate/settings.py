@@ -16,9 +16,6 @@ INDENTATION_DEFAULT = int(os.environ.get("INDENTATION_DEFAULT", 2))
 # Default input file encoding
 ENCODING = os.environ.get("ENCODING", "utf-8")
 
-# Global cache
-GLOBAL_CACHE = dict()
-
 # Supported language codes
 # https://www.deepl.com/docs-api/translate-text
 # fmt: off
