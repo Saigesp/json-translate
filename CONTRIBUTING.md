@@ -26,6 +26,14 @@ DEEPL_AUTH_KEY=your-key-here
 
 5. Create a working branch and start with your changes!
 
+### Tests your changes
+
+The tests will run automatically when you commit your changes. However, you can run them before with the command:
+
+```shell
+python -m unittest discover -b
+```
+
 ### Commit your update
 
 Commit the changes once you are happy with them.
