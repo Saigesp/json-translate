@@ -65,7 +65,7 @@ See the [contributing guide](CONTRIBUTING.md) for detailed instructions on how t
 ## Tests
 Run tests with:
 ```shell
-python -m unittest discover
+python -m unittest discover -b
 ```
 
 ## License
