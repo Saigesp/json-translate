@@ -1,29 +1,44 @@
 # json-deepl-translate
 
-Translate json files with deepl API
+CLI tool to translate json files automatically using Deepl API
+
+<a href="https://github.com/Saigesp/json-deepl-translate/issues">
+  <img src="https://img.shields.io/github/issues-raw/Saigesp/json-deepl-translate" alt="Open issues">
+</a>
+<a href="https://github.com/Saigesp/json-deepl-translate/pulls">
+  <img src="https://img.shields.io/github/issues-pr-raw/Saigesp/json-deepl-translate" alt="Open PRs">
+</a>
+<a href="https://github.com/Saigesp/json-deepl-translate/blob/master/LICENSE.md">
+  <img src="https://img.shields.io/github/license/Saigesp/json-deepl-translate" alt="License">
+</a>
+<a href="https://github.com/Saigesp/json-deepl-translate/releases">
+  <img src="https://img.shields.io/github/v/release/Saigesp/json-deepl-translate" alt="Release">
+</a>
+<a href="https://github.com/Saigesp/json-deepl-translate/graphs/contributors">
+  <img src="https://img.shields.io/github/contributors/Saigesp/json-deepl-translate" alt="Contributors">
+</a>
+<a href="https://github.com/Saigesp/json-deepl-translate/commits/master">
+  <img src="https://img.shields.io/github/last-commit/Saigesp/json-deepl-translate/master" alt="Commits">
+</a>
 
 Usually multi-language projects developed with a javascript framework (Angular, Vue...) base their translations on json files with different nesting levels. This small project allows you to generate new files for other languages while keeping the same structure.
 
-- Works with Python3
+The supported languages are [the same as DeepL](https://www.deepl.com/docs-api/translate-text).
+
+Requires **Python3**
 
 ```shell
-python json_translate /path/to/file/en_US.json --locale es --output es_ES.json --indent 4 --sleep 0.5
+python json_translate /path/to/file/en_US.json --locale FR
 ```
-> See more options with `python json_translate --help`
-
-## Supported languages
-
-You can check the supported languages at this link: [DeepL Translate Text Request Parameters](https://www.deepl.com/docs-api/translate-text) (parameters `source_lang` and `target_lang`)
 
 ## Install
-1. Create virtual environment
-
-2. Install dependencies:
+1. Clone this repository.
+2. Create a virtual environment.
+3. Install dependencies:
 ```shell
 pip install -r requirements.txt
 ```
-
-3. Create an `.env` file with:
+4. Create an `.env` file with:
 ```
 DEEPL_AUTH_KEY=your-key-here
 ```
@@ -34,7 +49,7 @@ If you wish to upgrade to a paid account, you will need to add the paid api endp
 DEEPL_API_ENDPOINT=https://api.deepl.com/v2/translate
 ```
 
-Other parameters can also be overwritten in the `.env` file:
+Other parameters can also be overwritten:
 ```
 SLEEP_BETWEEN_API_CALLS=0.01
 INDENTATION_DEFAULT=2
@@ -45,7 +60,7 @@ ENCODING=utf-8
 1. Execute the command with the file path and the language you want to generate
 
 ```shell
-python json_translate /home/user/my_project/locales/en_US.json --locale ES --output es_ES.json
+python json_translate /home/user/project/locales/en_US.json --locale ES --output es_ES.json
 ```
 > The script will create an `es_ES.json` file in the same folder as the source file.
 
@@ -78,4 +93,4 @@ curl -H "Authorization: DeepL-Auth-Key YOUR-API-KEY-HERE" https://api-free.deepl
 See the [contributing guide](CONTRIBUTING.md) for detailed instructions on how to get started.
 
 ## License
-This repository is available under **GNU LESSER GENERAL PUBLIC LICENSE v2.1** (LGPL). See [details](LICENSE.md).
+This repository is available under [**GNU LESSER GENERAL PUBLIC LICENSE v2.1** (LGPL)](LICENSE.md).
