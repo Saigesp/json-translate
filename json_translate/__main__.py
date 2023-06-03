@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from dotenv import load_dotenv
-
 from parser import get_parser
 from languages import get_target_lang_code
 from files import (
@@ -12,8 +10,6 @@ from files import (
     save_results_file,
 )
 from translators.deepl import DeepLTranslator
-
-load_dotenv()
 
 
 def main():

@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # DeppL API endpoint
 DEEPL_API_ENDPOINT = os.environ.get(
