@@ -36,13 +36,15 @@ class DeepLTranslator(BaseTranslator):
 
         data = {
             "target_lang": self.target_locale,
-            "source_lang": self.source_locale,
             "auth_key": os.environ.get("DEEPL_AUTH_KEY"),
             "text": text,
-            "preserve_formatting": "1"
+            "preserve_formatting": "1",
         }
 
-        if self.glossary != None:
+        if self.source_locale is not None:
+            data["source_lang"] = self.source_locale
+
+        if self.glossary is not None:
             data["glossary_id"] = self.glossary
 
         data = parse.urlencode(data).encode()

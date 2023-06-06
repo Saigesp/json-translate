@@ -15,8 +15,8 @@ class BaseTranslator(ABC):
     def __init__(
         self,
         target_locale: str,
-        source_locale: str,
-        glossary: str,
+        source_locale: str = None,
+        glossary: str = None,
         skip: list = None,
         sleep: float = SLEEP_BETWEEN_API_CALLS,
         encoding: str = ENCODING,
