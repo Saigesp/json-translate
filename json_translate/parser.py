@@ -35,6 +35,17 @@ def get_parser(prog_name):
         help="Language target to translate",
     )
     parser.add_argument(
+        "-sl",
+        "--source-locale",
+        default="en",
+        help="Language translating from (required for glossary)",
+    )
+    parser.add_argument(
+        "-g",
+        "--glossary",
+        help="ID of glossary to use when translating",
+    )
+    parser.add_argument(
         "-o",
         "--output",
         default="en.json",

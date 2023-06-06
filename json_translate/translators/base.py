@@ -15,6 +15,8 @@ class BaseTranslator(ABC):
     def __init__(
         self,
         target_locale: str,
+        source_locale: str,
+        glossary: str,
         skip: list = None,
         sleep: float = SLEEP_BETWEEN_API_CALLS,
         encoding: str = ENCODING,
@@ -31,6 +33,8 @@ class BaseTranslator(ABC):
         """
         self.skip_keys = skip or []
         self.target_locale = target_locale
+        self.source_locale = source_locale
+        self.glossary = glossary
         self.sleep = sleep
         self.encoding = encoding
         self.log_translations = log_translations
