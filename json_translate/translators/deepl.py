@@ -34,14 +34,18 @@ class DeepLTranslator(BaseTranslator):
 
         time.sleep(self.sleep)
 
-        data = parse.urlencode(
-            {
-                "target_lang": self.target_locale,
-                "auth_key": os.environ.get("DEEPL_AUTH_KEY"),
-                "text": text,
-                "preserve_formatting": "1",
-            }
-        ).encode()
+        data = {
+            "target_lang": self.target_locale,
+            "source_lang": self.source_locale,
+            "auth_key": os.environ.get("DEEPL_AUTH_KEY"),
+            "text": text,
+            "preserve_formatting": "1"
+        }
+
+        if self.glossary != None:
+            data["glossary_id"] = self.glossary
+
+        data = parse.urlencode(data).encode()
 
         req = request.Request(DEEPL_API_ENDPOINT, data=data)
         response = request.urlopen(req)  # nosec

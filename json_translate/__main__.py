@@ -30,6 +30,8 @@ def main():
     )
     translator = DeepLTranslator(
         target_locale=lang_code.upper(),
+        source_locale=args.source_locale,
+        glossary=args.glossary,
         sleep=args.sleep,
         skip=args.skip,
         encoding=args.encoding,
