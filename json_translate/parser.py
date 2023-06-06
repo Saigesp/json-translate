@@ -37,7 +37,6 @@ def get_parser(prog_name):
     parser.add_argument(
         "-sl",
         "--source-locale",
-        default="en",
         help="Language translating from (required for glossary)",
     )
     parser.add_argument(
