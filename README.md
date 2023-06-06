@@ -68,7 +68,7 @@ python json_translate /home/user/project/locales/en_US.json --locale ES --output
 
 ```
 -l, --locale          Target language to translate the file. Defaults to "en" (English)
--sl, --source-locale  Source language translating from (Required for glossaries). Defaults to "en" (English)
+-sl, --source-locale  Source language translating from (Optional, required for glossaries)
 -g, --glossary        Glossary ID to use when translating (Optional)
 -o, --output          Output file name. Defaults to "<target locale>.json" (ex: en.json)
 -s, --sleep           Sleep time between API calls. Defaults to 0.01 (seconds)
