@@ -10,11 +10,8 @@ from settings import (
 )
 
 
-def get_parser(prog_name):
-    """
-    Constructs and returns the argument parser for all commands.
-    """
-
+def get_parser(prog_name) -> argparse.ArgumentParser:
+    """Construct and return the argument parser for all commands."""
     if not os.environ.get("DEEPL_AUTH_KEY"):
         # TODO: Set as argument with default from env vars
         raise Exception("Environment variables not loaded")

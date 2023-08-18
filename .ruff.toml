@@ -1,0 +1,78 @@
+# Assume Python 3.11.
+target-version = "py310"
+
+# Enable these general rules
+# More rules on https://beta.ruff.rs/docs/rules/
+select = [
+    "E",   # Pycodestyle Errors
+    "W",   # Pycodestyle Warning
+    "F",   # Pyflakes
+    "UP",  # Pyupgrade
+    "D",   # Pydocstyle
+    "C",
+    "N",   # PEP8 Naming conventions
+    "FBT", # flake8-boolean-trap
+    "C4",  # flake8-comprehensions
+    "ISC", # flake8-implicit-str-concat
+    "G",   # flake8-logging-format
+    "PIE", # flake8-pie
+    "T20", # flake8-print
+    "RET", # flake8-return
+    "SLF", # flake8-self
+    "SIM", # flake8-simplify
+    "TID", # flake8-tidy-imports
+    "TCH", # flake8-type-checking
+    "PTH", # flake8-use-pathlib
+    "ERA", # eradicate
+]
+
+# Never enforce these rules
+ignore = [
+    "E501",   # Line too long
+    "UP009",  # Unnecessary UTF-8 encoding declaration
+    "D100",   # Missing docstring in public module
+    "D400",   # First line should end with a period
+    "G004",   # Logging statement uses f-string
+    "FBT001", # Boolean positional arg in function definition
+    "FBT002", # Boolean default value in function definition
+]
+
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+unfixable = []
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+# Same as Black.
+line-length = 88
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[per-file-ignores]
+"**/__init__.py" = ["F401", "D104"] # Ignore import violations; Missing docstring in public package
+
+[mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 10

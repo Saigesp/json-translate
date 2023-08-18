@@ -8,9 +8,10 @@ from settings import DEEPL_API_ENDPOINT
 
 
 class DeepLTranslator(BaseTranslator):
+    """DeepL translator class."""
+
     def translate_string(self, text: str) -> str:
-        """
-        Translate a specifig string
+        """Translate a specifig string.
 
         Test with curl:
         $ curl https://api-free.deepl.com/v2/translate \
@@ -21,7 +22,7 @@ class DeepLTranslator(BaseTranslator):
         :param text: string to translate
         :return: string translation
         """
-        if type(text) != type(str()):
+        if not isinstance(text, str):
             return text
 
         cached_result = self.cached.get(text)
@@ -56,17 +57,17 @@ class DeepLTranslator(BaseTranslator):
             self.log_translation(
                 input_text=text,
                 result=f"response status: {response.status}",
-                status=self.status.ERROR,
+                status=self.Status.error,
             )
             return text
 
         response_data = json.loads(response.read())
 
-        if not "translations" in response_data:
+        if "translations" not in response_data:
             self.log_translation(
                 input_text=text,
                 result=f"response empty: {response_data}",
-                status=self.status.ERROR,
+                status=self.Status.error,
             )
             return text
 
@@ -74,13 +75,13 @@ class DeepLTranslator(BaseTranslator):
             self.log_translation(
                 input_text=text,
                 result=f"more than 1 translation: {response_data['translations']})",
-                status=self.status.WARNING,
+                status=self.Status.warning,
             )
 
         self.log_translation(
             input_text=text,
             result=response_data["translations"][0]["text"],
-            status=self.status.SUCCESS,
+            status=self.Status.success,
         )
 
         dec_text = self.decode_text(
