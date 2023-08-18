@@ -1,16 +1,25 @@
 # -*- coding: utf-8 -*-
+import os
 import json
+from pathlib import Path
 from abc import ABC, abstractmethod
 from settings import ENCODING, SLEEP_BETWEEN_API_CALLS
 
 
 class BaseTranslator(ABC):
-    cached = dict()
+    """Translator Abstract base class.
 
-    class status:
-        SUCCESS = 0
-        WARNING = 1
-        ERROR = 2
+    Use this class to implement translators
+    """
+
+    cached = {}
+
+    class Status:
+        """Translation result status."""
+
+        success: int = 0
+        warning: int = 1
+        error: int = 2
 
     def __init__(
         self,
@@ -22,8 +31,7 @@ class BaseTranslator(ABC):
         encoding: str = ENCODING,
         log_translations: bool = False,
     ):
-        """
-        Initialize translator instance
+        """Initialize translator instance.
 
         :param target_locale: locale to translate
         :param skip: list of keys to ignore
@@ -39,57 +47,57 @@ class BaseTranslator(ABC):
         self.encoding = encoding
         self.log_translations = log_translations
 
-    def translate_file(self, filepath: str):
-        """
-        Translate file
+    def translate_file(self, filepath: os.PathLike) -> dict:
+        """Translate file.
 
         :param filepath: file path to translate
         :return: translation
         """
-        with open(filepath, "r", encoding=self.encoding) as f:
+        with Path.open(Path(filepath), "r", encoding=self.encoding) as f:
             self.input_data = json.load(f)
 
-        return self.iterate_over_keys(self.input_data)
+        return self._iterate_over_keys(self.input_data)
 
-    def iterate_over_keys(self, data):
-        """
-        Iterate on data and translate the corresponding values
+    def _iterate_over_keys(self, data) -> list | dict | str:
+        """Iterate on data and translate the corresponding values.
 
         :param data: data to iterate
         :return: translated block
         """
-
         if isinstance(data, dict):
             # Value is hierarchical, so iterate it
-            return self.get_dict_iteration(data)
+            return self._get_dict_iteration(data)
 
         if isinstance(data, list):
             # Value is multiple, so iterate it
-            return [self.iterate_over_keys(value) for value in data]
+            return [self._iterate_over_keys(value) for value in data]
 
         if isinstance(data, str):
             # Value is string, so translate it
-            return self.get_string_iteration(data)
+            return self._get_string_iteration(data)
 
-        if isinstance(data, bool) or isinstance(data, int) or isinstance(data, float):
+        if isinstance(data, (bool | int | float)):
             # Value is boolean or numerical, return same value
             return data
 
-    def get_dict_iteration(self, data: dict) -> dict:
-        result = dict()
+        raise Exception(f"Can't determine {data} type")
+
+    def _get_dict_iteration(self, data: dict) -> dict:
+        result = {}
         for key, value in data.items():
             if key in self.skip_keys:
                 result[key] = value
             else:
-                result[key] = self.iterate_over_keys(value)
+                result[key] = self._iterate_over_keys(value)
         return result
 
-    def get_string_iteration(self, data: str) -> str:
+    def _get_string_iteration(self, data: str) -> str:
         if data == "":
             return data
         return self.translate_string(data)
 
     def decode_text(self, text: str) -> str:
+        """Decode text."""
         return str(text)  # TODO: improve decoding
 
     def log_translation(
@@ -98,24 +106,27 @@ class BaseTranslator(ABC):
         result: str = "",
         status: int = 0,
     ) -> None:
+        """Log translations result."""
         if not self.log_translations:
             return
 
-        if not status == self.status.SUCCESS:
+        if status != self.Status.success:
             result = f" ({result})"
             translation = input_text
 
-        if status == self.status.WARNING:
-            str_status = "WARNING: "
-        elif status == self.status.ERROR:
-            str_status = "ERROR: "
+        if status == self.Status.warning:
+            str_status = "warning: "
+        elif status == self.Status.error:
+            str_status = "error: "
         else:
             str_status = ""
             translation = f"{input_text} -> {result}"
             result = ""
 
-        print(f"{str_status}{translation}{result}")
+        # TODO: log properly
+        print(f"{str_status}{translation}{result}")  # noqa: T201
 
     @abstractmethod
     def translate_string(self):
+        """Require translate_string to be implemented."""
         raise NotImplementedError

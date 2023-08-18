@@ -25,7 +25,7 @@ Usually multi-language projects developed with a javascript framework (Angular, 
 
 The supported languages are [the same as DeepL](https://www.deepl.com/docs-api/translate-text).
 
-Requires **Python3**
+Requires **Python version >= 3.10**
 
 ```shell
 python json_translate /path/to/file/en_US.json --locale FR

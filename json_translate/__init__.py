@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-# from .__main__ import decode_text
-# from .parser import get_parser
-import os, sys
+import os
+import sys
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+sys.path.append(os.path.dirname(os.path.realpath(__file__)))  # noqa: PTH120
 
-import files
-import languages
-import parser
-import settings
+import files  # noqa: E402
+import languages  # noqa: E402
+import argparser  # noqa: E402
+import settings  # noqa: E402
