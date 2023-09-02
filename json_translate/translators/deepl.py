@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import os
-import time
 import json
 from urllib import request, parse
 from .base import BaseTranslator
@@ -10,31 +9,21 @@ from settings import DEEPL_API_ENDPOINT
 class DeepLTranslator(BaseTranslator):
     """DeepL translator class."""
 
+    def __init__(self, *args, **kwargs):
+        """Initialize DeepL translator instance.
+
+        :param **kwargs:
+            glossary: Glossary ID to use when translating
+        """
+        self.glossary = kwargs.get("glossary")
+        super().__init__(*args, **kwargs)
+
     def translate_string(self, text: str) -> str:
         """Translate a specifig string.
-
-        Test with curl:
-        $ curl https://api-free.deepl.com/v2/translate \
-            -d auth_key=YOUR-API-KEY-HERE \
-            -d "text=Hello, world!" \
-            -d "target_lang=ES"
 
         :param text: string to translate
         :return: string translation
         """
-        if not isinstance(text, str):
-            return text
-
-        cached_result = self.cached.get(text)
-        if cached_result:
-            self.log_translation(
-                input_text=text,
-                result=f"{cached_result} (cached)",
-            )
-            return cached_result
-
-        time.sleep(self.sleep)
-
         data = {
             "target_lang": self.target_locale,
             "auth_key": os.environ.get("DEEPL_AUTH_KEY"),
@@ -78,16 +67,4 @@ class DeepLTranslator(BaseTranslator):
                 status=self.Status.warning,
             )
 
-        self.log_translation(
-            input_text=text,
-            result=response_data["translations"][0]["text"],
-            status=self.Status.success,
-        )
-
-        dec_text = self.decode_text(
-            text=response_data["translations"][0]["text"],
-        )
-
-        self.cached[text] = dec_text
-
-        return dec_text
+        return response_data["translations"][0]["text"]

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import time
 from abc import ABC, abstractmethod
 from settings import ENCODING, SLEEP_BETWEEN_API_CALLS
 
@@ -21,14 +22,15 @@ class BaseTranslator(ABC):
     def __init__(
         self,
         target_locale: str,
+        *,
         source_locale: str = None,
-        glossary: str = None,
         skip: list = None,
         sleep: float = SLEEP_BETWEEN_API_CALLS,
         encoding: str = ENCODING,
         log_translations: bool = False,
+        **kwargs,
     ):
-        """Initialize translator instance.
+        """Initialize base translator instance.
 
         :param target_locale: locale to translate
         :param skip: list of keys to ignore
@@ -39,7 +41,6 @@ class BaseTranslator(ABC):
         self.skip_keys = skip or []
         self.target_locale = target_locale
         self.source_locale = source_locale
-        self.glossary = glossary
         self.sleep = sleep
         self.encoding = encoding
         self.log_translations = log_translations
@@ -85,12 +86,26 @@ class BaseTranslator(ABC):
                 result[key] = self._iterate_over_keys(value)
         return result
 
-    def _get_string_iteration(self, data: str) -> str:
-        if data == "":
-            return data
-        return self.translate_string(data)
+    def _get_string_iteration(self, text: str) -> str:
+        if not isinstance(text, str) or text == "":
+            return text
 
-    def decode_text(self, text: str) -> str:
+        cached_result = self.cached.get(text)
+        if cached_result:
+            self.log_translation(text, f"{cached_result} (cached)")
+            return cached_result
+
+        time.sleep(self.sleep)
+
+        result = self.translate_string(text)
+        self.log_translation(text, result)
+
+        decoded = self.decode(result)
+        self.cached[text] = decoded
+
+        return decoded
+
+    def decode(self, text: str) -> str:
         """Decode text."""
         return str(text)  # TODO: improve decoding
 
