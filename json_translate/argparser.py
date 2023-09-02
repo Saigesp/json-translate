@@ -42,6 +42,12 @@ def get_parser(prog_name) -> argparse.ArgumentParser:
         help="ID of glossary to use when translating",
     )
     parser.add_argument(
+        "-e",
+        "--extend",
+        action="store_true",
+        help="Extend an existing translation file",
+    )
+    parser.add_argument(
         "-o",
         "--output",
         help="Output file name",

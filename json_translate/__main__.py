@@ -7,6 +7,7 @@ from files import (
     get_file_name_without_extension,
     get_input_file_from_dir,
     get_output_file,
+    get_data_to_translate,
     save_results_file,
 )
 from translators.deepl import DeepLTranslator
@@ -27,7 +28,16 @@ def main():
         exit(1)
 
     output_file = get_output_file(
-        output=args.output, lang_code=lang_code, input_file=input_file
+        output=args.output,
+        lang_code=lang_code,
+        input_file=input_file,
+        extend=args.extend,
+    )
+    data_to_translate = get_data_to_translate(
+        input_file=input_file,
+        output_file=output_file,
+        extend=args.extend,
+        encoding=args.encoding,
     )
     translator = DeepLTranslator(
         target_locale=lang_code.upper(),
@@ -38,10 +48,11 @@ def main():
         encoding=args.encoding,
         log_translations=args.log,
     )
-    results = translator.translate_file(filepath=input_file)
+    results = translator.translate(data=data_to_translate)
     save_results_file(
         data=results,
         output_file=output_file,
+        extend=args.extend,
         indent=args.indent,
         encoding=args.encoding,
     )
