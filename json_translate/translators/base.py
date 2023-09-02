@@ -130,3 +130,7 @@ class BaseTranslator(ABC):
     def translate_string(self):
         """Require translate_string to be implemented."""
         raise NotImplementedError
+
+    def __repr__(self):
+        """Repr the child classes."""
+        return f"{self.__class__.__name__}({self.target_locale.lower()})"
