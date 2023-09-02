@@ -44,7 +44,6 @@ def get_parser(prog_name) -> argparse.ArgumentParser:
     parser.add_argument(
         "-o",
         "--output",
-        default="en.json",
         help="Output file name",
     )
     parser.add_argument(
