@@ -78,7 +78,7 @@ def get_output_file(output: str, lang_code: str, input_file: str) -> str:
     :param input_file: input file
     :return: file to output translations
     """
-    output_file_name = output if output else f"{lang_code}.json"
+    output_file_name = output if output else f"{lang_code.lower()}.json"
 
     if not output_file_name.endswith(".json"):
         output_file_name += ".json"
