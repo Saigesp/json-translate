@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
-import json
-from pathlib import Path
 from abc import ABC, abstractmethod
 from settings import ENCODING, SLEEP_BETWEEN_API_CALLS
 
@@ -47,16 +44,13 @@ class BaseTranslator(ABC):
         self.encoding = encoding
         self.log_translations = log_translations
 
-    def translate_file(self, filepath: os.PathLike) -> dict:
-        """Translate file.
+    def translate(self, data: dict) -> dict:
+        """Translate nested data.
 
-        :param filepath: file path to translate
+        :param data: data to translate
         :return: translation
         """
-        with Path.open(Path(filepath), "r", encoding=self.encoding) as f:
-            self.input_data = json.load(f)
-
-        return self._iterate_over_keys(self.input_data)
+        return self._iterate_over_keys(data)
 
     def _iterate_over_keys(self, data) -> list | dict | str:
         """Iterate on data and translate the corresponding values.
@@ -130,3 +124,7 @@ class BaseTranslator(ABC):
     def translate_string(self):
         """Require translate_string to be implemented."""
         raise NotImplementedError
+
+    def __repr__(self):
+        """Repr the child classes."""
+        return f"{self.__class__.__name__}({self.target_locale.lower()})"

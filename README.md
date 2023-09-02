@@ -71,6 +71,7 @@ python json_translate /home/user/project/locales/en_US.json --locale ES --output
 -sl, --source-locale  Source language translating from (Optional, required for glossaries)
 -g, --glossary        Glossary ID to use when translating (Optional)
 -o, --output          Output file name. Defaults to "<target locale>.json" (ex: en.json)
+-e, --extend          Extend an existing translation file (defined by output file name)
 -s, --sleep           Sleep time between API calls. Defaults to 0.01 (seconds)
 -i, --indent          Output file indentation spaces. Defaults to 2
 --encoding            Input & output file encoding. Defaults to UTF-8
@@ -82,7 +83,7 @@ python json_translate /home/user/project/locales/en_US.json --locale ES --output
 ### Example file
 Translate the example file `/tests/data/en_US.json` to spanish:
 ```shell
-python json_translate tests/data/en_US.json --locale ES --output es_ES.json --skip lorem ipsum --log
+python json_translate tests/data/en_US.json --locale ES --skip lorem ipsum --log
 ```
 
 ## API usage

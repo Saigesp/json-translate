@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import os
-from pathlib import Path
 import re
 import json
+from pathlib import Path
+from mergedeep import merge
+from datadiff import DataDiff
 
 
 def get_input_dir_from_file(file: os.PathLike) -> os.PathLike:
@@ -70,12 +72,19 @@ def get_input_file_from_dir(input_dir: str) -> os.PathLike:
     return os.path.normpath(input_dir)
 
 
-def get_output_file(output: str, lang_code: str, input_file: str) -> str:
+def get_output_file(
+    *,
+    output: str,
+    lang_code: str,
+    input_file: str,
+    extend: bool = False,
+) -> str:
     """Get output file.
 
-    :param output: output file
+    :param output: output file name
     :param lang_code: output file language code
     :param input_file: input file
+    :param extend: if output file must be extended
     :return: file to output translations
     """
     output_file_name = output if output else f"{lang_code.lower()}.json"
@@ -85,7 +94,7 @@ def get_output_file(output: str, lang_code: str, input_file: str) -> str:
 
     output_file = Path(input_file).parent / output_file_name
 
-    if output_file.exists():
+    if output_file.exists() and not extend:
         override = input(
             f"File {output_file_name} already exists."
             " Do you want to override it? [Y/n] "
@@ -96,12 +105,46 @@ def get_output_file(output: str, lang_code: str, input_file: str) -> str:
                 output_file_name += ".json"
 
             return Path(input_file).parent / output_file_name
+
     return output_file
+
+
+def get_data_to_translate(
+    input_file: os.PathLike,
+    *,
+    output_file: os.PathLike = None,
+    extend: bool = False,
+    encoding: str = "utf8",
+) -> dict:
+    """Get data to translate.
+
+    :param input_file: file to translate
+    :param output_file: file to save
+    :param extend: if output file must be extended
+    :param encoding: file encoding
+    """
+    if extend and (output_file is None or not output_file.exists()):
+        print("Existing file to extend not found")  # noqa: T201
+        exit(1)
+
+    with Path.open(input_file, "r", encoding=encoding) as file:
+        input_data = json.load(file)
+
+    if not extend:
+        return input_data
+
+    with Path.open(output_file, "r", encoding=encoding) as file:
+        existing_data = json.load(file)
+
+    diff = DataDiff(existing_data, input_data)
+    return diff.to_dict()
 
 
 def save_results_file(
     data: dict,
-    output_file: str,
+    output_file: os.PathLike,
+    *,
+    extend: bool = False,
     indent: int = 2,
     encoding: str = "utf8",
 ) -> None:
@@ -109,9 +152,17 @@ def save_results_file(
 
     :param data: dict object to dump into file
     :param output_file: output file path
+    :param extend: if output file must be extended
     :param indent: json indentation
     :param encoding: file encoding
     """
+    if extend:
+        if output_file is None or not output_file.exists():
+            raise Exception("Existing file to extend not found")
+
+        with Path.open(output_file, "r", encoding=encoding) as file:
+            data = merge(json.load(file), data)
+
     with Path.open(output_file, "w", encoding=encoding) as file:
         json.dump(data, file, indent=indent, ensure_ascii=False)
 
