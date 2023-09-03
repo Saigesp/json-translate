@@ -30,7 +30,7 @@ Usually multi-language projects developed with a javascript framework (Angular, 
 > Requires **Python version >= 3.10**
 
 ```shell
-python json_translate deepl /path/to/file.json FR
+json_translate deepl /path/to/file.json FR
 ```
 
 The supported languages depends on the service used:
@@ -82,8 +82,8 @@ AWS_SECRET_ACCESS_KEY=your-aws-secret
 Execute the command with the service, the file path and the language you want to generate:
 
 ```sh
-python json_translate <service> <source> <locale>
-# Example: python json_translate aws locales/en.json ES
+json_translate <service> <source> <locale>
+# Example: json_translate aws locales/en.json ES
 ```
 
 The script will create an `es.json` file in the same folder as the source file.
@@ -132,7 +132,7 @@ ENCODING=utf-8
 ### Example file
 Translate the example file `/tests/data/en_US.json` to spanish:
 ```shell
-python json_translate deepl tests/data/en_US.json ES --skip lorem ipsum --log
+json_translate deepl tests/data/en_US.json ES --skip lorem ipsum --log
 ```
 
 ## DeepL API usage
