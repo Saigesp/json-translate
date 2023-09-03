@@ -78,6 +78,7 @@ def get_output_file(
     lang_code: str,
     input_file: str,
     extend: bool = False,
+    override: bool = False,
 ) -> str:
     """Get output file.
 
@@ -85,6 +86,7 @@ def get_output_file(
     :param lang_code: output file language code
     :param input_file: input file
     :param extend: if output file must be extended
+    :param override: if output file must be overrided
     :return: file to output translations
     """
     output_file_name = output if output else f"{lang_code.lower()}.json"
@@ -95,11 +97,13 @@ def get_output_file(
     output_file = Path(input_file).parent / output_file_name
 
     if output_file.exists() and not extend:
-        override = input(
+        if override:
+            return output_file
+        ask_override = input(
             f"File {output_file_name} already exists."
             " Do you want to override it? [Y/n] "
         )
-        if override.lower() not in ("y", "yes", "ok", ""):
+        if ask_override.lower() not in ("y", "yes", "ok", ""):
             output_file_name = input("Enter the new file name: ")
             if not output_file_name.endswith(".json"):
                 output_file_name += ".json"

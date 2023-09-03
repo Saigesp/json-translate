@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
 import argparse
 
 from settings import (
@@ -10,25 +9,23 @@ from settings import (
 )
 
 
-def get_parser(prog_name) -> argparse.ArgumentParser:
+def get_parser() -> argparse.ArgumentParser:
     """Construct and return the argument parser for all commands."""
-    if not os.environ.get("DEEPL_AUTH_KEY"):
-        # TODO: Set as argument with default from env vars
-        raise Exception("Environment variables not loaded")
-
     parser = argparse.ArgumentParser(
-        prog=prog_name,
+        prog="json_translate",
         description="Translate json files using the DeepL API ",
         epilog="Report issues at https://github.com/Saigesp/json-deepl-translate/issues",
+    )
+    parser.add_argument(
+        "service",
+        help="Translation service to use",
     )
     parser.add_argument(
         "file",
         help="Folder or file to look for translation source",
     )
     parser.add_argument(
-        "-l",
-        "--locale",
-        default="en",
+        "locale",
         help="Language target to translate",
     )
     parser.add_argument(
@@ -46,6 +43,11 @@ def get_parser(prog_name) -> argparse.ArgumentParser:
         "--extend",
         action="store_true",
         help="Extend an existing translation file",
+    )
+    parser.add_argument(
+        "--override",
+        action="store_true",
+        help="Override existing translation file (don't ask)",
     )
     parser.add_argument(
         "-o",
