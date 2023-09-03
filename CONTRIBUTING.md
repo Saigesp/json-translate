@@ -1,4 +1,4 @@
-# Welcome to json-deepl-translate contributing guide
+# Welcome to json-translate contributing guide
 
 Thank you for investing your time in contributing to this project!
 

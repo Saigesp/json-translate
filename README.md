@@ -2,26 +2,26 @@
 
 CLI tool to translate json files automatically using external translation services like **DeepL** or **AWS Translate**
 
-<a href="https://github.com/Saigesp/json-deepl-translate">
+<a href="https://github.com/Saigesp/json-translate">
   <img alt="" src="https://img.shields.io/badge/python-3.10-blue.svg">
 </a>
-<a href="https://github.com/Saigesp/json-deepl-translate/issues">
-  <img src="https://img.shields.io/github/issues-raw/Saigesp/json-deepl-translate" alt="Open issues">
+<a href="https://github.com/Saigesp/json-translate/issues">
+  <img src="https://img.shields.io/github/issues-raw/Saigesp/json-translate" alt="Open issues">
 </a>
-<a href="https://github.com/Saigesp/json-deepl-translate/pulls">
-  <img src="https://img.shields.io/github/issues-pr-raw/Saigesp/json-deepl-translate" alt="Open PRs">
+<a href="https://github.com/Saigesp/json-translate/pulls">
+  <img src="https://img.shields.io/github/issues-pr-raw/Saigesp/json-translate" alt="Open PRs">
 </a>
-<a href="https://github.com/Saigesp/json-deepl-translate/blob/master/LICENSE.md">
-  <img src="https://img.shields.io/github/license/Saigesp/json-deepl-translate" alt="License">
+<a href="https://github.com/Saigesp/json-translate/blob/master/LICENSE.md">
+  <img src="https://img.shields.io/github/license/Saigesp/json-translate" alt="License">
 </a>
-<a href="https://github.com/Saigesp/json-deepl-translate/releases">
-  <img src="https://img.shields.io/github/v/release/Saigesp/json-deepl-translate" alt="Release">
+<a href="https://github.com/Saigesp/json-translate/releases">
+  <img src="https://img.shields.io/github/v/release/Saigesp/json-translate" alt="Release">
 </a>
-<a href="https://github.com/Saigesp/json-deepl-translate/graphs/contributors">
-  <img src="https://img.shields.io/github/contributors/Saigesp/json-deepl-translate" alt="Contributors">
+<a href="https://github.com/Saigesp/json-translate/graphs/contributors">
+  <img src="https://img.shields.io/github/contributors/Saigesp/json-translate" alt="Contributors">
 </a>
-<a href="https://github.com/Saigesp/json-deepl-translate/commits/master">
-  <img src="https://img.shields.io/github/last-commit/Saigesp/json-deepl-translate/master" alt="Commits">
+<a href="https://github.com/Saigesp/json-translate/commits/master">
+  <img src="https://img.shields.io/github/last-commit/Saigesp/json-translate/master" alt="Commits">
 </a>
 
 Usually multi-language projects developed with a javascript framework (Angular, Vue...) base their translations on json files with different nesting levels. This small project allows you to generate new files for other languages while keeping the same structure.

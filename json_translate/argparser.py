@@ -14,7 +14,7 @@ def get_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="json_translate",
         description="Translate json files using the DeepL API ",
-        epilog="Report issues at https://github.com/Saigesp/json-deepl-translate/issues",
+        epilog="Report issues at https://github.com/Saigesp/json-translate/issues",
     )
     parser.add_argument(
         "service",
