@@ -39,13 +39,9 @@ The supported languages depends on the service used:
 
 
 ## Install
-1. Clone this repository.
-
-1. Create a virtual environment.
-
 1. Install dependencies:
     ```shell
-    pip install -r requirements.txt
+    pip install json-translate
     ```
 1. To define the environmental variables, create an `.env` file in the root directory with the required variables, which will vary depending on the external service you will use:
     ```
