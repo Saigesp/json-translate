@@ -6,15 +6,16 @@ from pathlib import Path
 if sys.version_info.major == 2:
     sys.exit("Python 2 is not supported anymore. The last supported version is 3.10.0")
 
-version = "0.3.0"
+BASE_DIR = Path(__file__).resolve().parent
+version = "{{VERSION_PLACEHOLDER}}"
 
-with Path.open("README.md") as fh:
+with Path.open(BASE_DIR / "README.md") as fh:
     long_description = fh.read()
 
 
 def get_reqs(filename):
     """Read file per-line."""
-    with Path.open(filename) as reqs_file:
+    with Path.open(BASE_DIR / filename) as reqs_file:
         return reqs_file.readlines()
 
 
