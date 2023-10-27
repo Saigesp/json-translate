@@ -1,21 +1,24 @@
 # json-translate
 
-CLI tool to translate json files automatically using external translation services like **DeepL** or **AWS Translate**
+CLI tool to translate JSON files automatically using external translation services like **DeepL** or **AWS Translate**
 
 <a href="https://github.com/Saigesp/json-translate">
   <img alt="" src="https://img.shields.io/badge/python-3.10-blue.svg">
-</a>
-<a href="https://github.com/Saigesp/json-translate/issues">
-  <img src="https://img.shields.io/github/issues-raw/Saigesp/json-translate" alt="Open issues">
-</a>
-<a href="https://github.com/Saigesp/json-translate/pulls">
-  <img src="https://img.shields.io/github/issues-pr-raw/Saigesp/json-translate" alt="Open PRs">
 </a>
 <a href="https://github.com/Saigesp/json-translate/blob/master/LICENSE.md">
   <img src="https://img.shields.io/github/license/Saigesp/json-translate" alt="License">
 </a>
 <a href="https://github.com/Saigesp/json-translate/releases">
   <img src="https://img.shields.io/github/v/release/Saigesp/json-translate" alt="Release">
+</a>
+<a href="https://pepy.tech/project/json-translate">
+  <img alt="" src="https://static.pepy.tech/badge/json-translate">
+</a>
+<a href="https://github.com/Saigesp/json-translate/issues">
+  <img src="https://img.shields.io/github/issues-raw/Saigesp/json-translate" alt="Open issues">
+</a>
+<a href="https://github.com/Saigesp/json-translate/pulls">
+  <img src="https://img.shields.io/github/issues-pr-raw/Saigesp/json-translate" alt="Open PRs">
 </a>
 <a href="https://github.com/Saigesp/json-translate/graphs/contributors">
   <img src="https://img.shields.io/github/contributors/Saigesp/json-translate" alt="Contributors">
@@ -24,13 +27,18 @@ CLI tool to translate json files automatically using external translation servic
   <img src="https://img.shields.io/github/last-commit/Saigesp/json-translate/master" alt="Commits">
 </a>
 
-Usually multi-language projects developed with a javascript framework (Angular, Vue...) base their translations on json files with different nesting levels. This small project allows you to generate new files for other languages while keeping the same structure.
-
-> [!WARNING]
-> Requires **Python version >= 3.10**
+Normally, multilingual projects base their translations on JSON files with different levels of nesting. This small project makes it easy to generate new files for new languages while keeping the same structure.
 
 ```shell
-json_translate deepl /path/to/file.json FR
+json_translate deepl /path/to/input-file.json FR
+
+# Input file:                    Output file:
+# {                              {  
+#   "welcome": "Welcome!",         "welcome": "Bienvenue!",
+#   "questions": {                 "questions": {
+#     "sure": "Are you sure?"        "sure": "Êtes-vous sûr?"
+#    }                             }
+# }                              }
 ```
 
 The supported languages depends on the service used:
@@ -66,7 +74,7 @@ You can use DeepL with a free account or with a paid account.
 
 ### Use with AWS Translate
 
-Login on your AWS account and obtain your credentials, the place them in the `.env` file:
+Login on your AWS account and obtain your credentials and place them in the `.env` file:
 ```
 AWS_REGION_NAME=your-aws-region
 AWS_ACCESS_KEY_ID=your-aws-access-key
