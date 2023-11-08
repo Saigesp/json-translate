@@ -38,7 +38,7 @@ repos:
     hooks:
       - id: local-tests
         name: local-tests
-        entry: python -m unittest discover -b
+        entry: python -m unittest discover -b tests/
         always_run: true
         pass_filenames: false
         language: system

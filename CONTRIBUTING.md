@@ -31,7 +31,7 @@ DEEPL_AUTH_KEY=your-key-here
 The tests will run automatically when you commit your changes. However, you can run them before with the command:
 
 ```shell
-python -m unittest discover -b
+python -m unittest discover -b tests/
 ```
 
 ### Commit your update
