@@ -33,7 +33,7 @@ Normally, multilingual projects base their translations on JSON files with diffe
 json_translate deepl /path/to/input-file.json FR
 
 # Input file:                    Output file:
-# {                              {  
+# {                              {
 #   "welcome": "Welcome!",         "welcome": "Bienvenue!",
 #   "questions": {                 "questions": {
 #     "sure": "Are you sure?"        "sure": "Êtes-vous sûr?"
@@ -131,7 +131,6 @@ SLEEP_BETWEEN_API_CALLS=0.01
 INDENTATION_DEFAULT=2
 ENCODING=utf-8
 ```
-
 
 ### Example file
 Translate the example file `/tests/data/en_US.json` to spanish:

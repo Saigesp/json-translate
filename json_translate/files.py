@@ -55,21 +55,23 @@ def get_input_file_from_dir(input_dir: str) -> os.PathLike:
     :param input_dir: selected folder to search for files
     :return: file to translate
     """
-    if Path(input_dir).is_dir():
-        json_files = find_files(input_dir)
-        return get_input_file(json_files, input_dir)
+    input_dir_norm = os.path.normpath(input_dir)
 
-    if not input_dir.endswith(".json"):
+    if Path(input_dir_norm).is_dir():
+        json_files = find_files(input_dir_norm)
+        return get_input_file(json_files, input_dir_norm)
+
+    if not input_dir_norm.endswith(".json"):
         print(  # noqa: T201
             "You must select a json file or a folder containing json files"
         )
         exit(1)
 
-    if not Path(input_dir).is_file():
-        print("File not found")  # noqa: T201
+    if not Path(input_dir_norm).is_file():
+        print("File not found:", input_dir_norm)  # noqa: T201
         exit(1)
 
-    return os.path.normpath(input_dir)
+    return Path(input_dir_norm)
 
 
 def get_output_file(
