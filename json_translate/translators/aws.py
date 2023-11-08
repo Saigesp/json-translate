@@ -11,12 +11,6 @@ from settings import (
 class AWSTranslator(BaseTranslator):
     """AWS translator class."""
 
-    client = boto3.client(
-        "translate",
-        region_name=AWS_REGION_NAME,
-        aws_access_key_id=AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-    )
 
     def __init__(self, *args, **kwargs):
         """Initialize AWS translator instance.
@@ -25,6 +19,12 @@ class AWSTranslator(BaseTranslator):
             formality: level of formality for translations
             profanity: mask profane words and phrases
         """
+        self.client = boto3.client(
+            "translate",
+            region_name=AWS_REGION_NAME,
+            aws_access_key_id=AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+        )
         self.formality = kwargs.get("formality")
         self.profanity = kwargs.get("profanity")
 
