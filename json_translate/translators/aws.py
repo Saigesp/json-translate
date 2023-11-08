@@ -11,7 +11,6 @@ from settings import (
 class AWSTranslator(BaseTranslator):
     """AWS translator class."""
 
-
     def __init__(self, *args, **kwargs):
         """Initialize AWS translator instance.
 
