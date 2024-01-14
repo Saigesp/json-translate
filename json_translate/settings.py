@@ -25,9 +25,10 @@ ENCODING = os.getenv("ENCODING", "utf-8")
 # fmt: off
 DEELP_SUPPORTED_LANGS = ( # https://www.deepl.com/docs-api/translate-text
     "BG", "CS", "DA", "DE", "EL", "EN", "EN-GB", "EN-US", "ES", "ET", "FI", "FR", "HU", "ID",
-    "IT", "JA", "LT", "LV", "NL", "PL", "PT-PT", "PT-BR", "RO", "RU", "SK", "SL", "SV",
-    "TR", "UK", "ZH",
+    "IT", "JA", "KO", "LT", "LV", "NB", "NL", "PL", "PT-BR", "PT-PT", "RO", "RU", "SK",
+    "SL", "SV", "TR", "UK", "ZH",
 )
+
 AWS_SUPPORTED_LANGS = ( # https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
     "af", "sq", "am", "ar", "hy", "az", "bn", "bs", "bg", "ca", "zh", "zh-TW", "hr", "cs",
     "da", "fa-AF", "nl", "en", "et", "fa", "tl", "fi", "fr", "fr-CA", "ka", "de", "el",
