@@ -23,7 +23,7 @@ ENCODING = os.getenv("ENCODING", "utf-8")
 
 # Supported language codes
 # fmt: off
-DEELP_SUPPORTED_LANGS = (
+DEELP_SUPPORTED_LANGS = ( # https://www.deepl.com/docs-api/translate-text
     "BG", "CS", "DA", "DE", "EL", "EN", "EN-GB", "EN-US", "ES", "ET", "FI", "FR", "HU", "ID",
     "IT", "JA", "KO", "LT", "LV", "NB", "NL", "PL", "PT-BR", "PT-PT", "RO", "RU", "SK",
     "SL", "SV", "TR", "UK", "ZH",
