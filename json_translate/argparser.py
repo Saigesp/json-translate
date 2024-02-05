@@ -83,5 +83,15 @@ def get_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="If print translation results",
     )
+    parser.add_argument(
+        "--formality",
+        action="store_true",
+        help="Set formality level to FORMAL",
+    )
+    parser.add_argument(
+        "--profanity",
+        action="store_true",
+        help="Mask profane words and phrases",
+    )
 
     return parser
