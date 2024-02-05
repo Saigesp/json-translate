@@ -120,7 +120,7 @@ target_locale         Translation target language code
 
 #### AWS Translate options
 ```
---formality           Level of formality for translations
+--formality           Set formality level to FORMAL
 --profanity           Mask profane words and phrases
 ```
 

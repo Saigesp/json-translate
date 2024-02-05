@@ -24,8 +24,8 @@ class AWSTranslator(BaseTranslator):
             aws_access_key_id=AWS_ACCESS_KEY_ID,
             aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
         )
-        self.formality = kwargs.get("formality")
-        self.profanity = kwargs.get("profanity")
+        self.formality = "FORMAL" if kwargs.get("formality") else "INFORMAL"
+        self.profanity = "MASK" if kwargs.get("profanity") else None
 
         if kwargs.get("source_locale") is None:
             raise Exception("Param 'source_locale' is required in AWSTranslator")

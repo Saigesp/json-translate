@@ -47,6 +47,8 @@ def main():
         encoding=args.encoding,
         log_translations=args.log,
         glossary=args.glossary,
+        formality=args.formality,
+        profanity=args.profanity,
     )
     results = translator.translate(
         data=data_to_translate,
