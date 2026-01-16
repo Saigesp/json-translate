@@ -42,7 +42,7 @@ json_translate deepl /path/to/input-file.json FR
 ```
 
 The supported languages depends on the service used:
-- [DeepL supported languages](https://www.deepl.com/docs-api/translate-text).
+- [DeepL supported languages](https://developers.deepl.com/docs/getting-started/supported-languages).
 - [AWS supported languages](https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html).
 
 
@@ -61,7 +61,7 @@ The supported languages depends on the service used:
 
 You can use DeepL with a free account or with a paid account.
 
-- **Free account**: You can get a free deepl developer account in https://www.deepl.com/pro-checkout/account (Credit card needed). Once you have registered, you must include your auth key in the `.env` file:
+- **Free account**: You can get a free deepl developer account in https://www.deepl.com/en/pro#developer (Credit card needed). Once you have registered, you must include your auth key in the `.env` file:
     ```
     DEEPL_AUTH_KEY=your-key-here
     ```
