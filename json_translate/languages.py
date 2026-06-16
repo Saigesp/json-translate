@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from settings import DEELP_SUPPORTED_LANGS, AWS_SUPPORTED_LANGS
+from settings import DEEPL_SUPPORTED_LANGS, AWS_SUPPORTED_LANGS
 
 
 def get_target_lang_code(service: str, locale: str) -> str:
@@ -16,7 +16,7 @@ def get_target_lang_code(service: str, locale: str) -> str:
             "Language code to translate to (usually 2 letters, unless a supported region like EN-GB): "
         )
 
-    if service == "deepl" and lang_code.upper() not in DEELP_SUPPORTED_LANGS:
+    if service == "deepl" and lang_code.upper() not in DEEPL_SUPPORTED_LANGS:
         # TODO: Log properly
         print(  # noqa: T201
             f"Language {lang_code} is not supported by DeepL.",
