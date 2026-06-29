@@ -33,7 +33,7 @@ class AWSTranslator(BaseTranslator):
         super().__init__(*args, **kwargs)
 
     def translate_string(self, text: str) -> str:
-        """Translate a specifig string.
+        """Translate a specific string.
 
         :param text: string to translate
         :return: string translation
